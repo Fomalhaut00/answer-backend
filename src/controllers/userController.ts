@@ -6,13 +6,20 @@ export default {
     try {
       const users = await userService.getAllUsers();
       res.json(users);
-    } catch (error) {
+    } catch (error: any) {
+      
       res.status(500).json({ error: error.message });
     }
   },
-  // 其他控制器方法...
-  createUser(){
-
+  async createUser(req: Request, res: Response){
+    // console.log(req);
+    
+    try {
+      const user = await userService.createUser(req.body);
+      res.json(user);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
   }
   
 };
