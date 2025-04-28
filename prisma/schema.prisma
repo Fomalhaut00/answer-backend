@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -8,11 +5,11 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./answer.db"
 }
 
 model User {
-  id               BigInt     @id @default(autoincrement())
+  id               Int     @id @default(autoincrement())
   createdAt        DateTime?  @map("created_at") @default(now())
   updatedAt        DateTime?  @map("updated_at") @updatedAt
   suspendedAt      DateTime?  @map("suspended_at")
@@ -39,6 +36,5 @@ model User {
   ipInfo           String     @map("ip_info")
   isAdmin          Int        @default(0) @map("is_admin") // deprecated
 
-  @@map("users")
   @@index([status])
 }
